@@ -1,9 +1,19 @@
 import { Label, TextInput } from 'flowbite-react'
+import { FormEvent, useState } from 'react'
 import { HiMail } from 'react-icons/hi'
 
 export const RegisterForm = () => {
+  const [email, setEmail] = useState('')
+
+  function handleSubmit (event: FormEvent) {
+    event.preventDefault()
+    const data = {
+      email
+    }
+    console.log({ data })
+  }
   return (
-    <form className="flex flex-col gap-4 mt-8">
+    <form className="flex flex-col gap-4 mt-8" onSubmit={handleSubmit}>
       <div>
         <div className="mb-2 block">
           <Label
@@ -15,8 +25,10 @@ export const RegisterForm = () => {
           id="email"
           type="email"
           placeholder="johndoe@mail.com"
+          value={email}
           required={true}
           icon={HiMail}
+          onChange={e => setEmail(e.target.value)}
         />
       </div>
 
