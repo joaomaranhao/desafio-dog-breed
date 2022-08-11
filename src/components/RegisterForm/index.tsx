@@ -1,16 +1,18 @@
 import { Label, TextInput } from 'flowbite-react'
-import { FormEvent, useState } from 'react'
+import { FormEvent, useContext, useState } from 'react'
 import { HiMail } from 'react-icons/hi'
+import { AuthContext } from '../../contexts/AuthContext'
 
 export const RegisterForm = () => {
   const [email, setEmail] = useState('')
+  const { signIn } = useContext(AuthContext)
 
-  function handleSubmit (event: FormEvent) {
+  async function handleSubmit (event: FormEvent) {
     event.preventDefault()
     const data = {
       email
     }
-    console.log({ data })
+    await signIn(data)
   }
   return (
     <form className="flex flex-col gap-4 mt-8" onSubmit={handleSubmit}>
