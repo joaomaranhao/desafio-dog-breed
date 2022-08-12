@@ -18,7 +18,6 @@ const Lista: NextPage = () => {
   useEffect(() => {
     api.get('/list').then(response => {
       setList(response.data.list)
-      console.log(response.data.list)
     })
   }, [])
   return (
