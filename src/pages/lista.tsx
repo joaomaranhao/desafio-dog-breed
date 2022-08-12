@@ -21,7 +21,7 @@ const Lista: NextPage = () => {
       <div className='container max-w-full mx-auto py-10'>
         <div className='max-w-sm mx-auto px-6'>
           <Button.Group>
-            <Button color="dark" onClick={() => handleBreedSelection('chihuhua')}>
+            <Button color="dark" onClick={() => handleBreedSelection('chihuahua')}>
               Chihuahua
             </Button>
             <Button color="dark" onClick={() => handleBreedSelection('husky')}>
