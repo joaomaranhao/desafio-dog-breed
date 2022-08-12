@@ -3,9 +3,13 @@ import { NextPage } from 'next'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { api } from '../services/api'
+import Lightbox from 'yet-another-react-lightbox'
+import 'yet-another-react-lightbox/styles.css'
 
 const Lista: NextPage = () => {
   const [list, setList] = useState([])
+  const [open, setOpen] = useState(false)
+  const [imageSrc, setImgSrc] = useState('')
 
   function handleBreedSelection (breed: string) {
     api.get(`/list?breed=${breed}`).then(response => setList(response.data.list))
@@ -14,6 +18,7 @@ const Lista: NextPage = () => {
   useEffect(() => {
     api.get('/list').then(response => {
       setList(response.data.list)
+      console.log(response.data.list)
     })
   }, [])
   return (
@@ -45,11 +50,27 @@ const Lista: NextPage = () => {
                     objectFit='contain'
                     width='100%'
                     height='100%'
+                    onClick={() => {
+                      setImgSrc(image)
+                      setOpen(true)
+                    }}
                   />
               </div>
               )
             })}
         </div>
+        <Lightbox
+        styles={{ container: { backgroundColor: 'rgba(0, 0, 0, .8)' } }}
+        open={open}
+        close={() => setOpen(false)}
+        slides={[
+          { src: imageSrc }
+        ]}
+        render={{
+          buttonPrev: () => null,
+          buttonNext: () => null
+        }}
+      />
       </div>
     </>
   )
