@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { api } from '../services/api'
 import Lightbox from 'yet-another-react-lightbox'
 import 'yet-another-react-lightbox/styles.css'
+import { parseCookies } from 'nookies'
 
 const Lista: NextPage = () => {
   const [list, setList] = useState([])
@@ -16,7 +17,12 @@ const Lista: NextPage = () => {
   }
 
   useEffect(() => {
-    api.get('/list').then(response => {
+    const cookies = parseCookies()
+    api.get('/list', {
+      headers: {
+        Authorization: cookies['dogbreed.token']
+      }
+    }).then(response => {
       setList(response.data.list)
     })
   }, [])
